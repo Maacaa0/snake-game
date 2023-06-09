@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>SNAKE</title>
+</head>
+<body>
+    <h1>SNAKE</h1>
+    
+    <p class="score">YOUR SCORE: <span id="score">0</span></p>
+    <div class="board">
+        <div class="dot"></div>
+        <div id="snake"></div>
+    </div>
+
+    <div class="controls">
+        <p class="start">Press spacebar to start!
+        <small>(or touch this text)</small>
+        </p>
+    </div>
+    
+    <button id="instructionsBtn">instructions</button>
+    <button id="resetBtn">reset</button>
+
+    <div id="instructionsModal" class="instructions_modal hidden">
+        <button id="closeModalBtn">x</button>
+        <p>swipe any left, right, top, down to change direction (on mobile)</p>
+        <span class="or">or</span>
+        <div class="instructions">
+            <div class="top">
+              <p>W</p>
+            </div>
+            <p class="bottom">A</p>
+            <p class="bottom">S</p>
+            <p class="bottom">D</p>
+        </div>
+        <span class="or">or</span>
+        <div class="instructions">
+            <div class="top">
+              <p><i class="fa-solid fa-arrow-up"></i></p>
+            </div>
+            <p class="bottom"><i class="fa-solid fa-arrow-left"></i></p>
+            <p class="bottom"><i class="fa-solid fa-arrow-down"></i></p>
+            <p class="bottom"><i class="fa-solid fa-arrow-right"></i></p>
+        </div>
+        <div class="controls">
+            <p>Press spacebar to start! (or text below game board)</p>
+        </div>
+    </div>
+    <script src="main.js"></script>
+    <script src="https://kit.fontawesome.com/e02d150246.js" crossorigin="anonymous"></script>
+</body>
+</html>
