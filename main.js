@@ -14,7 +14,7 @@ snake.style.left = "40px";
 snake.style.top = "40px";
 let leftVal = parseInt(snake.style.left);
 let topVal = parseInt(snake.style.top);
-let snakeArr = [];
+let snakeArr = [snake];
 let movementHistory = []; 
 let movementTimeout;
 let actualPosition;
@@ -27,38 +27,45 @@ let scorePoints = 0;
 document.onkeydown = checkKey;
 
 
+let blocked = true; // make sure snake can't turn on one line (preventing crashing)
 // CHANGE DIRECTION BASED ON A KEYPRESS
 function checkKey(e) {
     e = e || window.event;
-
-    if ((e.keyCode == '38' || e.keyCode == '87') && direction !== "down") {
+    if ((e.keyCode == '38' || e.keyCode == '87') && direction !== "down" && !blocked) {
         // up arrow
         direction = "up";
+        
     }
-    else if ((e.keyCode == '40' || e.keyCode == '83') && direction !== "up") {
+    else if ((e.keyCode == '40' || e.keyCode == '83') && direction !== "up" && !blocked) {
         // down arrow
         direction = "down"
     }
-    else if ((e.keyCode == '37' || e.keyCode == '65') && direction !== "right") {
+    else if ((e.keyCode == '37' || e.keyCode == '65') && direction !== "right" && !blocked) {
        // left arrow
        direction = "left"
     }
-    else if ((e.keyCode == '39' || e.keyCode == '68') && direction !== "left") {
+    else if ((e.keyCode == '39' || e.keyCode == '68') && direction !== "left" && !blocked) {
        // right arrow
        direction = "right"
     }
+
+    blocked = true;
     return direction
 }
 
 //CHECK GAME BORDERS HIT
 
 function checkBorders() {
-    if (leftVal >= boardWidth || leftVal < 0) {
-        clearTimeout(movementTimeout);
-    } else if (topVal >= boardHeight || topVal < 0) {
-        clearTimeout(movementTimeout);
+    if (leftVal >= boardWidth ||
+         leftVal < 0 ||
+          topVal >= boardHeight ||
+           topVal < 0) {
+            gameOver()
     }
 }
+
+let actualPositionArr;
+let movementHistoryArr;
 
 function snakeMovement() {
     snake.style.left = `${leftVal}px`;
@@ -68,15 +75,26 @@ function snakeMovement() {
         left: leftVal,
         top: topVal
     });
+    
 
     actualPosition = {
         left: leftVal,
         top: topVal
     }
+    
+    //handle self-crash
+    actualPositionArr = JSON.stringify([actualPosition.left, actualPosition.top]);
+    movementHistoryArr = movementHistory.map(move => JSON.stringify([move.left, move.top]))
 
-    movementHistory.splice(snakeArr.length);
+    if (movementHistoryArr.slice(1).some(some => some === actualPositionArr)) {
+        gameOver();
+    }
+        movementHistory.splice(snakeArr.length);
+        Object.entries(movementHistory).slice(0,1).map(entry => entry[1]);
+        console.log(movementHistory)
 
-    if (snakeArr.length > 0) {
+
+    if (snakeArr.length > 1) {
         snakeArr.map((snakePart,i) => {
             snakePart.style.left = `${movementHistory[i].left}px`;
             snakePart.style.top = `${movementHistory[i].top}px`;
@@ -87,30 +105,11 @@ function snakeMovement() {
         replaceDot();
         createSnakePart();
         scorePoints += 5;
-        SPEED -= 5;
+        SPEED -= 3;
     }
-
     score.innerHTML = scorePoints;
+    blocked = false;
 }
-
-
-//  function start() {
-//   startInterval = setInterval(()=> {
-//     if (direction === "right") {
-//         leftVal += 10;
-//     } else if (direction === "down") {
-//         topVal += 10;
-//     } else if (direction === "left") {
-//         leftVal -= 10;
-//     } else if (direction === "up") {
-//         topVal -= 10;
-//     }
-
-//     checkBorders();
-//     snakeMovement();
-
-//   }, 2000);
-// }
 
 
 function start() {
@@ -133,6 +132,23 @@ function start() {
 }
 
 
+const snakeCrash = [
+         { transform: "translate(0, 0) rotate(0deg)" },
+         { transform: "translate(5px, 5px) rotate(5deg)" },
+         { transform: "translate(0, 0) rotate(0eg)" },
+         { transform: "translate(-5px, 5px) rotate(-5deg)" },
+         { transform: "translate(0, 0) rotate(0deg)" }
+];
+
+
+function gameOver() {
+    score.classList.add("gameOverScore");
+    clearTimeout(movementTimeout);
+    board.animate(snakeCrash, {
+        duration: 300,
+        iterations: 1,
+      })
+}
 
 
 // START GAME ON SPACEBAR PRESS
@@ -161,7 +177,7 @@ function createSnakePart() {
     const snakePart = document.createElement("div");
     snakePart.classList.add("snakePart");
     board.appendChild(snakePart);
-    snakeArr.push(snakePart)
+    snakeArr.push(snakePart);
 }
 
 // createSnakePart();
@@ -215,6 +231,9 @@ startGame.addEventListener('click', () => {
     }
 })
 
+
+
+
 function swipedetect(el, callback){
   
     var swipedir,
@@ -222,8 +241,8 @@ function swipedetect(el, callback){
     startY,
     distX,
     distY,
-    threshold = 100, //required min distance traveled to be considered swipe
-    restraint = 200, // maximum distance allowed at the same time in perpendicular direction
+    threshold = 50, //required min distance traveled to be considered swipe
+    restraint = 500, // maximum distance allowed at the same time in perpendicular direction
     allowedTime = 500, // maximum time allowed to travel that distance
     elapsedTime,
     startTime,
@@ -265,12 +284,12 @@ function swipedetect(el, callback){
 var el = document.getElementById('someel')
 swipedetect(el, function(swipedir){
     // swipedir contains either "none", "left", "right", "up", or "down"
-    if (swipedir =='left')
+    if (swipedir =='left' && direction !== "right")
         direction = 'left';
-    else if (swipedir =='right') 
+    else if (swipedir =='right' && direction !== "left") 
         direction = 'right'
-    else if (swipedir == 'up') 
+    else if (swipedir == 'up' && direction !== "down") 
         direction = 'up'
-    else if (swipedir =='down') 
+    else if (swipedir =='down' && direction !== "up") 
         direction = 'down'
 })
