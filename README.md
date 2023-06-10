@@ -42,5 +42,3 @@ This project is licensed under the MIT License. You can find more details in the
 ## Acknowledgments
 - The Snake Game is inspired by the classic arcade game of the same name.
 - Thanks to the contributors of libraries and resources used in this project.
-
-Feel free to customize this README file according to your specific game implementation and requirements.
