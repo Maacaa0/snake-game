@@ -166,9 +166,14 @@ button:focus {
     right: 1rem;
     top: 1rem;
   }
-
   
-
+  
+  ::selection {
+    color: white;
+    background-color: rgba(0,0,0,.5); /* Replace with your desired background color */
+    padding: 1rem;
+  }
+  
   @media (max-width: 750px) {
     .instructions_modal {
       padding: 2rem;

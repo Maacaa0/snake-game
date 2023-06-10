@@ -8,59 +8,63 @@ const instructionsBtn = document.getElementById("instructionsBtn");
 const closeModalBtn = document.getElementById("closeModalBtn");
 const startGame = document.querySelector(".start");
 
-let SPEED = 200;
 //default position of snake
 snake.style.left = "40px";
 snake.style.top = "40px";
 let leftVal = parseInt(snake.style.left);
 let topVal = parseInt(snake.style.top);
-let snakeArr = [snake];
-let movementHistory = []; 
+let snakeArr = [snake]; // arr to store all snake parts
+let movementHistory = []; //arr that stores path of snake
 let movementTimeout;
 let actualPosition;
-let direction = "right";
-let boardHeight = board.clientHeight;
+let direction = "right"; //default direction
+let SPEED = 200; // snake speed
+
+//size of game board
+let boardHeight = board.clientHeight; 
 let boardWidth = board.clientWidth;
-let startInterval; // declare setInterval 
-let gameStarted = false; // check if game started
+
+let gameStarted = false; // check if game started (prevent starting multiple games)
 let scorePoints = 0;
-document.onkeydown = checkKey;
 
 
-let blocked = true; // make sure snake can't turn on one line (preventing crashing)
-// CHANGE DIRECTION BASED ON A KEYPRESS
-function checkKey(e) {
+document.addEventListener('keydown', handleKeyPress);
+
+let blocked = true;
+
+function handleKeyPress(e) {
     e = e || window.event;
-    if ((e.keyCode == '38' || e.keyCode == '87') && direction !== "down" && !blocked) {
-        // up arrow
+    const key = e.key;
+
+    if ((key === 'ArrowUp' || key === 'w') && direction !== "down" && !blocked) {
+        // up arrow or 'w' key
         direction = "up";
-        
     }
-    else if ((e.keyCode == '40' || e.keyCode == '83') && direction !== "up" && !blocked) {
-        // down arrow
-        direction = "down"
+    else if ((key === 'ArrowDown' || key === 's') && direction !== "up" && !blocked) {
+        // down arrow or 's' key
+        direction = "down";
     }
-    else if ((e.keyCode == '37' || e.keyCode == '65') && direction !== "right" && !blocked) {
-       // left arrow
-       direction = "left"
+    else if ((key === 'ArrowLeft' || key === 'a') && direction !== "right" && !blocked) {
+        // left arrow or 'a' key
+        direction = "left";
     }
-    else if ((e.keyCode == '39' || e.keyCode == '68') && direction !== "left" && !blocked) {
-       // right arrow
-       direction = "right"
+    else if ((key === 'ArrowRight' || key === 'd') && direction !== "left" && !blocked) {
+        // right arrow or 'd' key
+        direction = "right";
     }
 
     blocked = true;
-    return direction
+    return direction;
 }
 
 //CHECK GAME BORDERS HIT
 
 function checkBorders() {
     if (leftVal >= boardWidth ||
-         leftVal < 0 ||
-          topVal >= boardHeight ||
-           topVal < 0) {
-            gameOver()
+        leftVal < 0 ||
+        topVal >= boardHeight ||
+        topVal < 0) {
+        gameOver();
     }
 }
 
@@ -75,44 +79,40 @@ function snakeMovement() {
         left: leftVal,
         top: topVal
     });
-    
 
     actualPosition = {
         left: leftVal,
         top: topVal
-    }
+    };
     
-    //handle self-crash
-    actualPositionArr = JSON.stringify([actualPosition.left, actualPosition.top]);
-    movementHistoryArr = movementHistory.map(move => JSON.stringify([move.left, move.top]))
-
-    if (movementHistoryArr.slice(1).some(some => some === actualPositionArr)) {
+    // Handle self-crash
+    if (movementHistory.slice(1).some(move => move.left === actualPosition.left && move.top === actualPosition.top)) {
         gameOver();
     }
-        movementHistory.splice(snakeArr.length);
-        Object.entries(movementHistory).slice(0,1).map(entry => entry[1]);
-        console.log(movementHistory)
 
+    movementHistory.splice(snakeArr.length);
 
-    if (snakeArr.length > 1) {
-        snakeArr.map((snakePart,i) => {
-            snakePart.style.left = `${movementHistory[i].left}px`;
-            snakePart.style.top = `${movementHistory[i].top}px`;
-        })
+    for (let i = 0; i < snakeArr.length; i++) {
+        snakeArr[i].style.left = `${movementHistory[i].left}px`;
+        snakeArr[i].style.top = `${movementHistory[i].top}px`;
     }
 
     if (leftVal === randomLeftRounded && topVal === randomTopRounded) {
         replaceDot();
         createSnakePart();
         scorePoints += 5;
-        SPEED -= 3;
+        if (SPEED > 50) {
+            SPEED -= 3;
+        }
     }
+    
     score.innerHTML = scorePoints;
     blocked = false;
 }
 
 
 function start() {
+    clearTimeout(movementTimeout);
     movementTimeout = 
     setTimeout(() => {
         if (direction === "right") {
@@ -135,7 +135,7 @@ function start() {
 const snakeCrash = [
          { transform: "translate(0, 0) rotate(0deg)" },
          { transform: "translate(5px, 5px) rotate(5deg)" },
-         { transform: "translate(0, 0) rotate(0eg)" },
+         { transform: "translate(0, 0) rotate(0deg)" },
          { transform: "translate(-5px, 5px) rotate(-5deg)" },
          { transform: "translate(0, 0) rotate(0deg)" }
 ];
@@ -180,8 +180,6 @@ function createSnakePart() {
     snakeArr.push(snakePart);
 }
 
-// createSnakePart();
-  
     let randomLeft;
     let randomTop;
 
@@ -189,8 +187,8 @@ function createSnakePart() {
     let randomTopRounded;
 
 function replaceDot() {
-    randomLeft = Math.floor(Math.random() * ((boardWidth - 20) - 0 + 1)) + 0;
-    randomTop = Math.floor(Math.random() * ((boardHeight - 20) - 0 + 1)) + 0;
+    randomLeft = Math.floor(Math.random() * ((boardWidth - 10) - 0 + 1)) + 0;
+    randomTop = Math.floor(Math.random() * ((boardHeight - 10) - 0 + 1)) + 0;
 
     randomLeftRounded = Math.round(randomLeft / 10) * 10;
     randomTopRounded = Math.round(randomTop / 10) * 10;
