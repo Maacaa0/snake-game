@@ -17,14 +17,10 @@ To run the Snake Game locally, follow these steps:
 
 1. Clone the repository:
 ```
-bash
-
 git clone https://github.com/your-username/snake-game.git
 ```
 2. Navigate to the project directory:
 ```
-bash
-
 cd snake-game
 ```
 3. Open the index.html file in your preferred web browser.
