@@ -28,9 +28,10 @@ Open the index.html file in your preferred web browser.
 Start playing the Snake Game!
 
 ## Technologies Used
-HTML5: Markup language for structuring the game interface.
-CSS3: Stylesheet language for designing the game layout and visuals.
-JavaScript: Programming language used for game logic and interactivity.
+- HTML5: Markup language for structuring the game interface.
+- CSS3: Stylesheet language for designing the game layout and visuals.
+- JavaScript: Programming language used for game logic and interactivity.
+- 
 ## Contributing
 Contributions to the Snake Game project are always welcome! If you find any bugs or want to suggest improvements, please open an issue on the GitHub repository.
 
@@ -38,6 +39,7 @@ Contributions to the Snake Game project are always welcome! If you find any bugs
 This project is licensed under the MIT License. You can find more details in the LICENSE file.
 
 ## Acknowledgments
-The Snake Game is inspired by the classic arcade game of the same name.
-Thanks to the contributors of libraries and resources used in this project.
+- The Snake Game is inspired by the classic arcade game of the same name.
+- Thanks to the contributors of libraries and resources used in this project.
+
 Feel free to customize this README file according to your specific game implementation and requirements.
