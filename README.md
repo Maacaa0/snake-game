@@ -16,22 +16,27 @@ You can play the game online by accessing the following link: [Snake Game Demo](
 To run the Snake Game locally, follow these steps:
 
 1. Clone the repository:
+```
 bash
-Copy code
-git clone https://github.com/your-username/snake-game.git
-2. Navigate to the project directory:
-bash
-Copy code
-cd snake-game
-Open the index.html file in your preferred web browser.
 
-Start playing the Snake Game!
+git clone https://github.com/your-username/snake-game.git
+```
+2. Navigate to the project directory:
+```
+bash
+
+cd snake-game
+```
+3. Open the index.html file in your preferred web browser.
+
+4. Start playing the Snake Game!
 
 ## Technologies Used
 - HTML5: Markup language for structuring the game interface.
 - CSS3: Stylesheet language for designing the game layout and visuals.
 - JavaScript: Programming language used for game logic and interactivity.
-- 
+
+
 ## Contributing
 Contributions to the Snake Game project are always welcome! If you find any bugs or want to suggest improvements, please open an issue on the GitHub repository.
 
