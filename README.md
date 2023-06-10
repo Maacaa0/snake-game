@@ -3,15 +3,16 @@ The Snake Game is a classic arcade game where the player controls a snake that m
 
 This is a simple implementation of the Snake Game using HTML, CSS, and JavaScript.
 
-Demo
+## Demo
 You can play the game online by accessing the following link: Snake Game Demo
 
-Features
-Responsive and intuitive controls: Use arrow keys or WASD keys to control the snake's movement.
-Randomized food placement: Food appears at random locations on the board for the snake to eat.
-Score tracking: The game keeps track of the player's score based on the number of food items eaten.
-Game over and reset: The game ends when the snake collides with the walls or itself. The player can reset the game to start over.
-Getting Started
+## Features
+- Responsive and intuitive controls: Use arrow keys or WASD keys to control the snake's movement.
+- Randomized food placement: Food appears at random locations on the board for the snake to eat.
+- Score tracking: The game keeps track of the player's score based on the number of food items eaten.
+- Game over and reset: The game ends when the snake collides with the walls or itself. The player can reset the game to start over.
+
+## Getting Started
 To run the Snake Game locally, follow these steps:
 
 Clone the repository:
@@ -26,17 +27,17 @@ Open the index.html file in your preferred web browser.
 
 Start playing the Snake Game!
 
-Technologies Used
+## Technologies Used
 HTML5: Markup language for structuring the game interface.
 CSS3: Stylesheet language for designing the game layout and visuals.
 JavaScript: Programming language used for game logic and interactivity.
-Contributing
+## Contributing
 Contributions to the Snake Game project are always welcome! If you find any bugs or want to suggest improvements, please open an issue on the GitHub repository.
 
-License
+## License
 This project is licensed under the MIT License. You can find more details in the LICENSE file.
 
-Acknowledgments
+## Acknowledgments
 The Snake Game is inspired by the classic arcade game of the same name.
 Thanks to the contributors of libraries and resources used in this project.
 Feel free to customize this README file according to your specific game implementation and requirements.
