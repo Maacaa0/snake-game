@@ -4,7 +4,7 @@ The Snake Game is a classic arcade game where the player controls a snake that m
 This is a simple implementation of the Snake Game using HTML, CSS, and JavaScript.
 
 ## Demo
-You can play the game online by accessing the following link: Snake Game Demo
+You can play the game online by accessing the following link: [Snake Game Demo](https://maacaa0.github.io/snake-game/)
 
 ## Features
 - Responsive and intuitive controls: Use arrow keys or WASD keys to control the snake's movement.
@@ -15,11 +15,11 @@ You can play the game online by accessing the following link: Snake Game Demo
 ## Getting Started
 To run the Snake Game locally, follow these steps:
 
-Clone the repository:
+1. Clone the repository:
 bash
 Copy code
 git clone https://github.com/your-username/snake-game.git
-Navigate to the project directory:
+2. Navigate to the project directory:
 bash
 Copy code
 cd snake-game
