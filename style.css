@@ -92,6 +92,7 @@ body {
     cursor: pointer;
     text-align: center;
     max-width: 90%;
+    margin-bottom: 1.2rem;
   }
 
   small {
