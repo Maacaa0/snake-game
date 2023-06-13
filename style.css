@@ -152,7 +152,7 @@ body {
     min-width: 100px;
     padding: .5rem;
     text-transform: uppercase;
-    width: auto;
+    width: 10rem;
   }
 
 button:hover,
